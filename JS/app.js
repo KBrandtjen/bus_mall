@@ -9,7 +9,6 @@ function picObject (picName, filePath) {
   this.clicks = 0;
   this.views = 0;
   imageArray.push(this);
-  //console.log(this);
 }
 
 new picObject('Baby Broom', 'img/sweep.jpg');//eslint-disable-line
@@ -35,6 +34,7 @@ new picObject('Unicorn Meat', 'img/unicorn.jpg');//eslint-disable-line
 
 var randomNumberArray = [];
 var previouslyShown = [];
+console.log(previouslyShown);
 //generating three random numbers
 function randomNumberGenerator () {
   randomNumberArray = [];
@@ -45,10 +45,10 @@ function randomNumberGenerator () {
     randomNumberArray[1] = (Math.floor(Math.random() * imageArray.length));
   }
   randomNumberArray.push(Math.floor(Math.random() * imageArray.length));
-  while (randomNumberArray[1] === randomNumberArray[2]){
+  while (randomNumberArray[1] === randomNumberArray[2] || (randomNumberArray[0] === randomNumberArray[2])){
     randomNumberArray[2] = (Math.floor(Math.random() * imageArray.length));
   }
-
+  //cannot equal any previous numbers or same number in sequence
   while (randomNumberArray[0] === previouslyShown[0] ||
         randomNumberArray[0] === previouslyShown[1] ||
         randomNumberArray[0] === previouslyShown[2] ||
@@ -57,13 +57,17 @@ function randomNumberGenerator () {
         randomNumberArray[1] === previouslyShown[2] ||
         randomNumberArray[2] === previouslyShown[0] ||
         randomNumberArray[2] === previouslyShown[1] ||
-        randomNumberArray[2] === previouslyShown[2]) {
+        randomNumberArray[2] === previouslyShown[2] ||
+        randomNumberArray[0] === randomNumberArray[1] ||
+        randomNumberArray[1] === randomNumberArray[2] ||
+        randomNumberArray[0] === randomNumberArray[2]) {
     randomNumberArray[0] = (Math.floor(Math.random() * imageArray.length));
     randomNumberArray[1] = (Math.floor(Math.random() * imageArray.length));
     randomNumberArray[2] = (Math.floor(Math.random() * imageArray.length));
   }
+  //console.log(randomNumberArray + 'are the current indexes');
 }
-//randomNumberGenerator();
+
 
 //display three images
 function displayThreeImages() {
@@ -86,7 +90,7 @@ function displayThreeImages() {
   imageArray[randomNumberArray[2]].views += 1;
 }
 //tally views
-function tallyViews() {}
+//function tallyViews() {}
 
 function handleClick(event) {
 
@@ -105,7 +109,7 @@ function handleClick(event) {
   totalClicks += 1;
   console.log('There have been ' + totalClicks + ' total clicks');
 
-  if (totalClicks > 5) {
+  if (totalClicks > 24) {
     photoSection.removeEventListener('click', handleClick);
     console.log('max number of clicks reached');
     resultsButton.hidden = false;
