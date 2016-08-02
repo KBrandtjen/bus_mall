@@ -39,11 +39,16 @@ var previouslyShown = [];
 function randomNumberGenerator () {
   randomNumberArray = [];
   randomNumberArray.push(Math.floor(Math.random() * imageArray.length));
-  // console.log(randLeftNumber);
+
   randomNumberArray.push(Math.floor(Math.random() * imageArray.length));
-  // console.log(randCenterNumber);
+  while (randomNumberArray[0] === randomNumberArray[1]){
+    randomNumberArray[1] = (Math.floor(Math.random() * imageArray.length));
+  }
   randomNumberArray.push(Math.floor(Math.random() * imageArray.length));
-  // console.log(randRightNumber);
+  while (randomNumberArray[1] === randomNumberArray[2]){
+    randomNumberArray[2] = (Math.floor(Math.random() * imageArray.length));
+  }
+
   while (randomNumberArray[0] === previouslyShown[0] ||
         randomNumberArray[0] === previouslyShown[1] ||
         randomNumberArray[0] === previouslyShown[2] ||
@@ -58,7 +63,7 @@ function randomNumberGenerator () {
     randomNumberArray[2] = (Math.floor(Math.random() * imageArray.length));
   }
 }
-randomNumberGenerator();
+//randomNumberGenerator();
 
 //display three images
 function displayThreeImages() {
@@ -72,17 +77,16 @@ function displayThreeImages() {
 //console.log(imageArray[randomNumberArray[0]].picName + ' has ' + imageArray[randomNumberArray[0]].views += 1);
   var getCenterPhoto = document.getElementById('centerPhoto');
   getCenterPhoto.src = imageArray[randomNumberArray[1]].filePath;
-  getLeftPhoto.alt = imageArray[randomNumberArray[1]].picName;
+  getCenterPhoto.alt = imageArray[randomNumberArray[1]].picName;
   imageArray[randomNumberArray[1]].views += 1;
 
   var getRightPhoto = document.getElementById('rightPhoto');
   getRightPhoto.src = imageArray[randomNumberArray[2]].filePath;
   getRightPhoto.alt = imageArray[randomNumberArray[2]].picName;
   imageArray[randomNumberArray[2]].views += 1;
-
-};
+}
 //tally views
-//function tallyViews() {
+function tallyViews() {}
 
 function handleClick(event) {
 
@@ -97,10 +101,12 @@ function handleClick(event) {
       console.log(imageArray[i].picName + ' has ' + imageArray[i].clicks);
     }
   }
-  totalClicks += 1;
 
-  if (totalClicks > 24) {
-    photoSection.removeEventListener(click, handleClick);
+  totalClicks += 1;
+  console.log('There have been ' + totalClicks + ' total clicks');
+
+  if (totalClicks > 5) {
+    photoSection.removeEventListener('click', handleClick);
     console.log('max number of clicks reached');
     resultsButton.hidden = false;
     return;
@@ -110,13 +116,12 @@ function handleClick(event) {
   displayThreeImages();
 }
 
-displayThreeImages();
-
-//exectuing code below
-
 function handleResultsButton() {
   alert ('this is where you draw the chart');
 }
+
+//exectuing code below
+displayThreeImages();
 
 var photoSection = document.getElementById('photoSection');
 photoSection.addEventListener('click', handleClick);
