@@ -1,2 +1,11 @@
-header {}
-  
+#leftPhoto {
+  width: 300px;
+}
+
+#centerPhoto {
+  width: 300px;
+}
+
+#rightPhoto {
+  width: 300px;
+}
