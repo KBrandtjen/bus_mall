@@ -13,3 +13,13 @@
 #rightPhoto {
   width: 300px;
 }
+
+button {}
+
+canvas {
+  outline: dotted 1px orange;
+}
+
+#chartSection {
+  outline: dotted 1px orange;
+}

@@ -112,7 +112,7 @@ function handleClick(event) {
   totalClicks += 1;
   console.log('There have been ' + totalClicks + ' total clicks');
 
-  if (totalClicks > 24) {
+  if (totalClicks > 4) {
     photoSection.removeEventListener('click', handleClick);
     console.log('max number of clicks reached');
     resultsButton.hidden = false;
@@ -146,18 +146,10 @@ var data = {
     {
       data: clickArray, // votes array we declared earlier
       backgroundColor: [
-        'bisque',
-        'darkgray',
-        'burlywood',
-        'lightblue',
         'navy'
       ],
       hoverBackgroundColor: [
-        'purple',
-        'purple',
-        'purple',
-        'purple',
-        'purple'
+        'grey'
       ]
     }]
 };
@@ -167,5 +159,8 @@ function drawChart() {
   busMallChart = new Chart(ctx,{
     type: 'bar',
     data: data,
+    options: {
+      responsiveness: false
+    }
   });
 };
