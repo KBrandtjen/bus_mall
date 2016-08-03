@@ -1,6 +1,6 @@
 'use strict';
 
-var imageArray = [];
+// var imageArray = [];
 var totalClicks = 0;
 var picNameArray = [];
 var clickArray = [];
@@ -14,26 +14,28 @@ function PicObject (picName, filePath) {
   imageArray.push(this);
 }
 
-new PicObject('Baby Broom', 'img/sweep.jpg');//eslint-disable-line
-new PicObject('Octopus Tail USB', 'img/usb.jpg');//eslint-disable-line
-new PicObject('Wine Glass', 'img/wine_glass.jpg');//eslint-disable-line
-new PicObject('Watering Can', 'img/water_can.jpg');//eslint-disable-line
-new PicObject('Tauntaun', 'img/tauntaun.jpg');//eslint-disable-line
-new PicObject('Sleeping Shark Bag', 'img/shark.jpg');//eslint-disable-line
-new PicObject('Pizza Scissors', 'img/scissors.jpg');//eslint-disable-line
-new PicObject('Pet Sweeper', 'img/pet_sweep.jpg');//eslint-disable-line
-new PicObject('Pen Cap Utensils', 'img/pen.jpg');//eslint-disable-line
-new PicObject('Dragon Meat', 'img/dragon.jpg');//eslint-disable-line
-new PicObject('Dog Beak', 'img/dog_duck.jpg');//eslint-disable-line
-new PicObject('Cthulhu', 'img/cthulhu.jpg');//eslint-disable-line
-new PicObject('Chair', 'img/chair.jpg');//eslint-disable-line
-new PicObject('Meatball Bubblegum', 'img/bubblegum.jpg');//eslint-disable-line
-new PicObject('Breakfast Maker', 'img/breakfast.jpg');//eslint-disable-line
-new PicObject('Open-Toe Boots', 'img/boots.jpg');//eslint-disable-line
-new PicObject('Bathroom Caddy', 'img/bathroom.jpg');//eslint-disable-line
-new PicObject('Banana Slicer', 'img/banana.jpg');//eslint-disable-line
-new PicObject('R2D2 Bag', 'img/bag.jpg');//eslint-disable-line
-new PicObject('Unicorn Meat', 'img/unicorn.jpg');//eslint-disable-line
+function newObjects () {
+  new PicObject('Baby Broom', 'img/sweep.jpg');
+  new PicObject('Octopus Tail USB', 'img/usb.jpg');
+  new PicObject('Wine Glass', 'img/wine_glass.jpg');
+  new PicObject('Watering Can', 'img/water_can.jpg');
+  new PicObject('Tauntaun', 'img/tauntaun.jpg');
+  new PicObject('Sleeping Shark Bag', 'img/shark.jpg');
+  new PicObject('Pizza Scissors', 'img/scissors.jpg');
+  new PicObject('Pet Sweeper', 'img/pet_sweep.jpg');
+  new PicObject('Pen Cap Utensils', 'img/pen.jpg');
+  new PicObject('Dragon Meat', 'img/dragon.jpg');
+  new PicObject('Dog Beak', 'img/dog_duck.jpg');
+  new PicObject('Cthulhu', 'img/cthulhu.jpg');
+  new PicObject('Chair', 'img/chair.jpg');
+  new PicObject('Meatball Bubblegum', 'img/bubblegum.jpg');
+  new PicObject('Breakfast Maker', 'img/breakfast.jpg');
+  new PicObject('Open-Toe Boots', 'img/boots.jpg');
+  new PicObject('Bathroom Caddy', 'img/bathroom.jpg');
+  new PicObject('Banana Slicer', 'img/banana.jpg');
+  new PicObject('R2D2 Bag', 'img/bag.jpg');
+  new PicObject('Unicorn Meat', 'img/unicorn.jpg');
+}
 
 var randomNumberArray = [];
 var previouslyShown = [];
@@ -105,6 +107,7 @@ function handleClick(event) {
   for (var i = 0; i < imageArray.length; i++) {
     if(event.target.alt === imageArray[i].picName) {
       imageArray[i].clicks += 1;
+      localStorage.setItem('storeImageArray',JSON.stringify(imageArray));
       console.log(imageArray[i].picName + ' has ' + imageArray[i].clicks);
     }
   }
@@ -132,6 +135,17 @@ function handleResultsButton() {
 }
 
 //exectuing code below
+
+// If
+if (localStorage.storeImageArray) {
+  var imageArray = JSON.parse(localStorage.getItem('storeImageArray'));
+  console.log('There is stuff in local storage');
+}
+else {
+  var imageArray = [];
+  newObjects();
+  console.log('local storage is empty');
+}
 displayThreeImages();
 
 var photoSection = document.getElementById('photoSection');
