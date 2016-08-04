@@ -115,7 +115,7 @@ function handleClick(event) {
   totalClicks += 1;
   console.log('There have been ' + totalClicks + ' total clicks');
 
-  if (totalClicks > 4) {
+  if (totalClicks > 24) {
     photoSection.removeEventListener('click', handleClick);
     console.log('max number of clicks reached');
     resultsButton.hidden = false;
@@ -160,7 +160,26 @@ var data = {
     {
       data: clickArray, // votes array we declared earlier
       backgroundColor: [
-        'navy'
+        'navy',
+        '#C73E1D',
+        '#2E86AB',
+        '#A23B72',
+        '#F18F01',
+        '#3B1F2B',
+        '#8E4A49',
+        '#7DAA92',
+        '#F71735',
+        '#8E4A49',
+        '#FEB95F',
+        '#FBBFCA',
+        '#698F3F',
+        '#4B1D3F',
+        '#0E7C7B',
+        '#A39BA8',
+        '#272D2D',
+        '#89043D',
+        '#847577',
+        '#248232'
       ],
       hoverBackgroundColor: [
         'grey'
